@@ -1,0 +1,16 @@
+
+{
+    "type":"mysql",
+    "host":"31.170.160.1",
+    "port": 3306,
+    "username":"u766130877_gestao",
+    "password":"Niteroi@11",
+    "database":"u766130877_gestao",    
+    "migrations":["src/database/migrations/*.ts"],
+    "entities":["src/entity/*.ts"],
+    "timezone":"local",
+    "cli":{
+        "migrationsDir":"src/database/migrations",
+        "entitiesDir":"src/entity"
+    }
+}
