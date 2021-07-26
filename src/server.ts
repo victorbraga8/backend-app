@@ -2,6 +2,7 @@ import "reflect-metadata";
 import express, { Router,Request, Response, NextFunction} from 'express';
 import "express-async-errors";
 
+
 import { router } from './routes';
 import "./database";
 
@@ -21,5 +22,6 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
         message:"Internal Server Error"
     })
 })
+console.log(process.env);
 
-app.listen(3000,()=>console.log("Server Rodando"))
+app.listen(3000,()=>console.log("Servidor Rodando"))
