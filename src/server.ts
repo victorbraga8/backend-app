@@ -22,6 +22,6 @@ app.use((err:Error, request:Request, response:Response, next:NextFunction)=>{
         message:"Internal Server Error"
     })
 })
-console.log(process.env);
+// console.log(process.env.USERNAME);
 
 app.listen(3000,()=>console.log("Servidor Rodando"))

@@ -1,4 +1,6 @@
-import {Entity,PrimaryGeneratedColumn,PrimaryColumn, Column} from "typeorm";
+import {Entity,PrimaryGeneratedColumn,PrimaryColumn, Column, OneToMany, OneToOne, JoinColumn, ManyToOne} from "typeorm";
+import { Prato } from "./Prato";
+import { Cardapio } from "./Cardapio";
 
 @Entity("cardapioPrato")
 class CardapioPrato {
@@ -10,6 +12,12 @@ class CardapioPrato {
 
     @Column()
     cardapio_id:number;
+
+
 }
 
 export {CardapioPrato}
+
+
+
+

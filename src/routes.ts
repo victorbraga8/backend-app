@@ -28,6 +28,7 @@ router.delete("/deletacategoria/:nome?", HandleCategoriasController.deletaCatego
 
 router.post("/cardapios", HandleCardapiosController.insereCardapio);
 router.post("/cardapioprato", HandleCardapioPratoController.insereCardapioPrato);
+router.get("/cardapiodia", HandleCardapioPratoController.listaCardapioDia);
 router.delete("/deletapratocardapio", HandleCardapioPratoController.deletaPratoCardapio)
 
 

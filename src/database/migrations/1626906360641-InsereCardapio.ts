@@ -11,19 +11,26 @@ export class InsereCardapio1626906360641 implements MigrationInterface {
                         name:'id',
                         type:'int',
                         isPrimary:true,
-                        isGenerated:true,
+                        isGenerated:true,                        
+                        generationStrategy:"increment"
                     }, 
                     {
                         name:'data',
                         type:'timestamp',
                         default:"now()",                        
+                    },
+                    {
+                        name:'updated_at',
+                        type:'timestamp',
+                        default:"now()",                        
                     }
-                ],                
+                ]                
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("cardapio")
     }
 
 }

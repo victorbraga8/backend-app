@@ -28,19 +28,13 @@ export class InserePratos1626817159287 implements MigrationInterface {
                         type:'boolean',
                         isNullable:false,
                     }
-                ],
-                foreignKeys:[{
-                    name:"FKCategoriaID",
-                    referencedTableName:"categorias",
-                    referencedColumnNames:["id"],
-                    columnNames:["categoria_id"]
-                }]
+                ]
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("usuarios")
+        await queryRunner.dropTable("pratos")
     }
 
 }

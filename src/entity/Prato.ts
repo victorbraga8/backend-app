@@ -1,4 +1,5 @@
-import {Entity,PrimaryGeneratedColumn,PrimaryColumn, Column} from "typeorm";
+import {Entity,PrimaryGeneratedColumn,PrimaryColumn, Column,ManyToMany,JoinTable} from "typeorm";
+import { Cardapio } from "./Cardapio";
 
 @Entity("pratos")
 class Prato {
@@ -13,6 +14,9 @@ class Prato {
 
     @Column()
     status:boolean;
+
+    @ManyToMany(() => Cardapio, cardapio => cardapio.id)
+    cardapios: Cardapio[];
 }
 
 export {Prato}

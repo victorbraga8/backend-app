@@ -13,6 +13,11 @@ class HandleCardapioPrato{
         const deletaPratoCardapio = await cardapioPrato.deletaPratoCardapio({pratos,cardapio_id});
         return response.json("Prato Deletado");
     }
+
+    async listaCardapioDia(request:Request, response:Response){
+        const cardapioDia = await cardapioPrato.listaCardapioDia();
+        return response.json(cardapioDia);
+    }
 }
 
 export{HandleCardapioPrato};

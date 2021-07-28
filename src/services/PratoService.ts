@@ -16,6 +16,14 @@ class HandleDbPratos{
             throw new Error("Informe o Prato");
         }
 
+        if(!categoria_id){
+            throw new Error("Informe a Categoria");
+        }
+
+        if(!status){
+            throw new Error("Informe o Status");
+        }
+
         if(pratoExistente){
             throw new Error("Prato já cadastrado");
         }
