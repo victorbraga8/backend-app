@@ -1,16 +1,19 @@
+import { response } from "express";
 import {getCustomRepository, MoreThanOrEqual} from "typeorm";
+import { Cardapio } from "../entity/Cardapio";
+import { CardapioPrato } from "../entity/CardapioPrato";
 
 import {CardapioPratoRepositories} from "../repositories/CardapioPratoRepositories";
 import {CardapioRepositories} from "../repositories/CardapioRepositories";
+import { CategoriaRepositories } from "../repositories/CategoriasRepositories";
 
 import {HandleDbCardapios} from "../services/CardapioService";
 
 const moment = require('moment-timezone');
-const dataAtual = moment().tz('America/Sao_Paulo').format('YYYY/MM/DD ')+"00:00:00";
+const dataAtual = moment().tz('America/Sao_Paulo').format('YYYY-MM-DD');
 
 class HandleDbCardapioPrato{
-    async insereCardapioPrato({pratos}){        
-        
+    async insereCardapioPrato({pratos}){                
         const cardapioRepositorio = getCustomRepository(CardapioRepositories);
         const cardapioPratoRepositorio = getCustomRepository(CardapioPratoRepositories);
         
@@ -42,25 +45,27 @@ class HandleDbCardapioPrato{
                 await cardapioPratoRepositorio.save(cardapioPrato)            
                 return cardapioPrato;
             }))                            
-            return {"Mensagem":"Cardapio Criado - Condicional 2 "+cardapioCriado[0].id};
-          
+            return {"Mensagem":"Cardapio Criado - Condicional 2 "+cardapioCriado[0].id};          
         }        
     }  
 
-    async deletaPratoCardapio({pratos, cardapio_id}){
-        if(!pratos && !cardapio_id){
-            throw new Error("Informe o prato para exclusão no cardápio");
-        }
-        console.log(pratos+" "+cardapio_id);
-        const cardapioPratoRepositorio = getCustomRepository(CardapioPratoRepositories);
-        const deletaPratoCardapio = cardapioPratoRepositorio.delete({prato_id:pratos, cardapio_id:cardapio_id})
-        
+    async deletaPratoCardapio({cardapio_id}){
+        if(!cardapio_id){
+            throw new Error("Informe o cardápio");
+        }        
+        const cardapioPratoRepositorio = getCustomRepository(CardapioPratoRepositories);         
+        const deletaPratoCardapio = await cardapioPratoRepositorio.createQueryBuilder("cardapioPrato").delete().from(CardapioPrato)
+        .where("cardapio_id = :cardapio_id",{cardapio_id:cardapio_id}).execute();
     } 
 
     async listaCardapioDia(){        
-        const cardapioRepositorio = getCustomRepository(CardapioRepositories);        
-        const cardapio = await cardapioRepositorio.findOne({ relations: ["pratos"],where:{data: MoreThanOrEqual(dataAtual)}});
-        console.log(cardapio);
+        const categoriaRepositorio = getCustomRepository(CategoriaRepositories);                
+        const cardapio = await categoriaRepositorio.createQueryBuilder('categoria')
+        .innerJoinAndSelect('categoria.prato','prato')
+        .innerJoinAndSelect('prato.cardapios','cardapio')                
+        .where('cardapio.data >= :data', {data: dataAtual})          
+        .orderBy('categoria.nome', 'ASC') 
+        .getMany();               
         return cardapio;        
     }
 }

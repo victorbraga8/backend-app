@@ -1,4 +1,5 @@
-import {Entity,PrimaryGeneratedColumn,PrimaryColumn, Column} from "typeorm";
+import {Entity,PrimaryGeneratedColumn,PrimaryColumn, Column, ManyToMany, JoinTable, ManyToOne, OneToMany, JoinColumn} from "typeorm";
+import { Prato } from "./Prato";
 
 @Entity("categorias")
 class Categoria {
@@ -8,6 +9,8 @@ class Categoria {
     @Column()
     nome:string;
 
+    @OneToMany(()=>Prato, prato=>prato.categoria)
+    prato: Prato;  
 }
 
 export {Categoria}

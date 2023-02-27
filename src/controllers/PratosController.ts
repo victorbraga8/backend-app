@@ -4,15 +4,15 @@ const pratos = new HandleDbPratos();
 
 class HandlePratos{
     async inserePrato(request:Request, response:Response){
-        const {nome, categoria_id, status} = request.body;
-                
-        const inserePrato = await pratos.inserePrato({nome, categoria_id, status});
-
+        const {nome, lactose, vegano, gluten, categoria_id} = request.body;
+        const status = true;            
+        const inserePrato = await pratos.inserePrato({nome, lactose, vegano, gluten, categoria_id}, status);
         return response.json(inserePrato);
         
     }
 
     async listaPrato(request:Request, response:Response){
+        
         const {nome} = request.params;
                 
         const listaPrato = await pratos.listaPrato({nome});
@@ -21,27 +21,27 @@ class HandlePratos{
     }
 
     async listaTodosOsPratos(request:Request, response:Response){
-        const {nome, categoria_id, status} = request.params;
-                
-        const listaPrato = await pratos.listaTodosOsPratos({nome, categoria_id, status});
+        const {categoria_id} = request.params;
+               
+        const listaPrato = await pratos.listaTodosOsPratos({categoria_id});
 
         return response.json(listaPrato);
     }
 
     async atualizaPrato(request:Request, response:Response){
-        const {nome, categoria_id, status, nomePrato} = request.body;
+        const {nome, lactose, vegano, gluten, categoria_id, status, id} = request.body;
         
-        const atualizaPrato = await pratos.atualizaPrato({nome, categoria_id, status, nomePrato});
+        const atualizaPrato = await pratos.atualizaPrato({nome, lactose, vegano, gluten, categoria_id, status, id});
 
         return response.json(atualizaPrato);
     }
 
     async deletaPrato(request:Request, response:Response){
-        const {nome} = request.params;
+        const {id} = request.params;
         
-        const deletaPrato = await pratos.deletaPrato({nome});
-
-        return response.json({"return":"Prato Excluído: "+nome});
+        const deletaPrato = await pratos.deletaPrato({id});
+        
+        return response.json({"return":"ID Prato Excluído: "+id});
     }
 }
 
