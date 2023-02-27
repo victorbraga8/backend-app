@@ -1,7 +1,7 @@
 {
   "name": "backend-app",
   "version": "1.0.0",
-  "main": "src/server.ts",
+  "main": "build/server.js",
   "repository": "https://github.com/victorbraga8/backend-app.git",
   "author": "victorbraga8 <victorbraga.8@hotmail.com>",
   "license": "MIT",
