@@ -15,10 +15,10 @@ class Usuario {
     @Column('boolean')
     admin: boolean;
 
-    @CreateDateColumn('date')
+    @CreateDateColumn()
     created_at:Date;
 
-    @UpdateDateColumn('date')
+    @UpdateDateColumn()
     updated_at: Date;
 
     // constructor(){
