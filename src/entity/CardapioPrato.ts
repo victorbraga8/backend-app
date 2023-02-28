@@ -7,10 +7,10 @@ class CardapioPrato {
     @PrimaryGeneratedColumn('increment')
     readonly id:number;
 
-    @Column()
+    @Column('int')
     prato_id:number;
 
-    @Column()
+    @Column('int')
     cardapio_id:number;
 
 

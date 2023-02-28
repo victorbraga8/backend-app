@@ -7,22 +7,22 @@ class Prato {
     @PrimaryGeneratedColumn('increment')
     readonly id:number;
 
-    @Column()
+    @Column('text')
     nome:string;
 
-    @Column()
+    @Column('int')
     lactose:number;
 
-    @Column()
+    @Column('int')
     vegano:number;
 
-    @Column()
+    @Column('int')
     gluten:number;
 
-    @Column()
+    @Column('int')
     categoria_id:number;
 
-    @Column()
+    @Column('boolean')
     status:boolean;
 
     @ManyToMany(() => Cardapio, cardapio => cardapio.pratos)

@@ -6,10 +6,10 @@ class Cardapio {
     @PrimaryGeneratedColumn('increment')
     readonly id:number;
 
-    @Column()
+    @Column('date')
     data:Date;
     
-    @Column()
+    @Column('date')
     updated_at:Date;    
 
     @ManyToMany(() => Prato, prato => prato.cardapios)

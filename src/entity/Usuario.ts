@@ -3,22 +3,22 @@ import {Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn} from 
 
 @Entity("usuarios")
 class Usuario {
-    @PrimaryColumn()
+    @PrimaryColumn('int')
     readonly id:string;
 
-    @Column()
+    @Column('text')
     name:string;
     
-    @Column()
+    @Column('text')
     email:string;
     
-    @Column()
+    @Column('boolean')
     admin: boolean;
 
-    @CreateDateColumn()
+    @CreateDateColumn('date')
     created_at:Date;
 
-    @UpdateDateColumn()
+    @UpdateDateColumn('date')
     updated_at: Date;
 
     // constructor(){

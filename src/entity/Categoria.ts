@@ -6,7 +6,7 @@ class Categoria {
     @PrimaryGeneratedColumn('increment')
     readonly id:number;
 
-    @Column()
+    @Column('text')
     nome:string;
 
     @OneToMany(()=>Prato, prato=>prato.categoria)
