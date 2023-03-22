@@ -10,7 +10,7 @@
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
     "build": "tsc --build",
     "start": "node build/server.js",
-    "vercel-build": "npx tsc && pm2 start build/server.js"
+    "vercel-build": "npm install && npx tsc && pm2 start build/server.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
