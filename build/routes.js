@@ -14,7 +14,7 @@ var HandleCategoriasController = new CategoriasController_1.HandleCategorias();
 var HandleCardapiosController = new CardapiosController_1.HandleCardapios();
 var HandleCardapioPratoController = new CardapioPratoController_1.HandleCardapioPrato();
 // router.post("/users", createUserController.handle)
-router.get("/", function (req, res) { res.json({ "mensagem": "Rota Base Atualizada - Inclusão de Tipagem de Colunas" }); });
+router.get("/", function (req, res) { res.json({ "mensagem": "Rota Base Atualizada - PM2" }); });
 router.post("/prato", HandlePratosController.inserePrato);
 router.get("/listaprato/:nome?", HandlePratosController.listaPrato);
 router.get("/listatodosospratos/:nome?/:categoria_id?/:status?", HandlePratosController.listaTodosOsPratos);
