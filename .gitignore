@@ -2,6 +2,7 @@
 *.env*
 *.package-lock.json*
 temp.js
+node_modules
 =======
 # Logs
 logs

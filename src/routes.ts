@@ -15,7 +15,7 @@ const HandleCardapioPratoController = new HandleCardapioPrato();
 
 
 // router.post("/users", createUserController.handle)
-router.get("/",(req,res)=>{res.json({"mensagem":"Rota Base Atualizada - Inclusão de NPX TSC"})});
+router.get("/",(req,res)=>{res.json({"mensagem":"Rota Base Atualizada - Atualização"})});
 router.post("/prato", HandlePratosController.inserePrato)
 router.get("/listaprato/:nome?", HandlePratosController.listaPrato)
 router.get("/listatodosospratos/:nome?/:categoria_id?/:status?", HandlePratosController.listaTodosOsPratos)
