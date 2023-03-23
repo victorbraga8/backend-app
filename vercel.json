@@ -9,7 +9,14 @@
   "routes": [
       {
           "src": "/(.*)",
-          "dest": "build/server.js"
+          "dest": "build/server.js",
+          "headers": {
+            "Cache-Control": "s-maxage=1, stale-while-revalidate"
+          },
+          "continue": true
       }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "mysql://TYPEORM_USERNAME:TYPEORM_PASSWORD@TYPEORM_HOST:3306/TYPEORM_DATABASE"
+  }
 }
