@@ -9,7 +9,11 @@
   "routes": [
       {
           "src": "/(.*)",
-          "dest": "build/server.js"
+          "dest": "build/server.js",
+          "headers": {
+            "Cache-Control": "s-maxage=1, stale-while-revalidate"
+          },
+          "continue": true
       }
   ]
 }
