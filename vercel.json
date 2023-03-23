@@ -15,5 +15,8 @@
           },
           "continue": true
       }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "mysql://u766130877_gestao:Niteroi@11@185.212.70.52:3306/u766130877_gestao"
+  }
 }
