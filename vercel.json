@@ -17,6 +17,6 @@
       }
   ],
   "env": {
-    "DATABASE_URL": "mysql://u766130877_gestao:Niteroi@11@185.212.70.52:3306/u766130877_gestao"
+    "DATABASE_URL": "mysql://TYPEORM_USERNAME:TYPEORM_PASSWORD@TYPEORM_HOST:3306/TYPEORM_DATABASE"
   }
 }
