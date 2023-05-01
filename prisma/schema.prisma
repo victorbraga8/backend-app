@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  reviewFeatures = ["query-logging"]
+  provider       = "prisma-client-js"
+  reviewFeatures = "(array)"
 }
 
 datasource db {
@@ -11,6 +11,9 @@ datasource db {
 model pratos {
   id           Int     @id @default(autoincrement())
   nome         String  @db.VarChar(255)
+  lactose      Boolean
+  vegano       Boolean
+  gluten       Boolean
   categoria_id Int
   status       Boolean
   categorias   categorias @relation(fields: [categoria_id], references: [id])
@@ -33,9 +36,6 @@ model cardapioPrato {
   prato_id    Int
   cardapio_id Int
 }
-
-
-
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
 model Ad {
@@ -103,8 +103,6 @@ model abmcj_espelho {
   comprovante  String   @db.VarChar(50)
   conclusao    String?  @db.VarChar(150)
 }
-
-
 
 model hospedagemClientes {
   id                   Int       @id @default(autoincrement())
