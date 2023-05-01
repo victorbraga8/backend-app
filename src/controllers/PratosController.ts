@@ -4,20 +4,26 @@ import { HandleDbPratos } from '../services/PratoService';
 const pratos = new HandleDbPratos();
 
 class HandlePratos{
-    // async inserePrato(request:Request, response:Response){
-    //     const {nome, lactose, vegano, gluten, categoria_id} = request.body;
-    //     const status = true;            
-    //     const inserePrato = await pratos.inserePrato({nome, lactose, vegano, gluten, categoria_id}, status);
-    //     return response.json(inserePrato);
+    async inserePrato(request:Request, response:Response){
+        const {nome, lactose, vegano, gluten, categoria_id} = request.body;       
         
-    // }
+        if(!nome){
+            throw new Error("Informe o Prato");
+        }
+
+        if(!categoria_id){
+            throw new Error("Informe a Categoria");
+        }
+        
+        const inserePrato = await pratos.inserePrato({nome, lactose, vegano, gluten, categoria_id} );
+        return response.json(inserePrato);        
+    }
 
     async listaPrato(request:Request, response:Response){
         
         const {nome} = request.params;
         const listaPrato = await pratos.listaPrato({nome});        
-        // const listaPrato = await pratos.listaPrato({nome});
-
+        
         return response.json(listaPrato);
     }
 

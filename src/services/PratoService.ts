@@ -28,37 +28,36 @@ class HandleDbPratos{
               }
         });        
 
-        if(!prato || typeof(prato) == "undefined"){
+        if(!prato || typeof(prato) == "undefined" || prato.length == 0){
             throw new Error("Prato Inexistente");
         }
         return prato;
     }
 
-    // async inserePrato({nome, lactose, vegano, gluten, categoria_id}:TypesPrato, status){
-    //     const pratoRepositorio = getCustomRepository(PratoRepositories);
-    //     const pratoExistente = await pratoRepositorio.findOne({nome});
+    async inserePrato({nome, lactose, vegano, gluten, categoria_id}){
 
-    //     if(!nome){
-    //         throw new Error("Informe o Prato");
-    //     }
-
-    //     if(!categoria_id){
-    //         throw new Error("Informe a Categoria");
-    //     }
-
-    //     if(pratoExistente){
-    //         throw new Error("Prato já cadastrado");
-    //     }
+        const pratoExistente = await prisma.pratos.findFirst({
+            where:{
+                nome:nome
+            }
+        });
         
-    //     console.log(gluten)
-    //     const prato = pratoRepositorio.create({
-    //         nome, lactose, vegano, gluten, categoria_id, status
-    //     })
+        if(pratoExistente){
+            throw new Error("Prato já cadastrado.");
+        }
+        const status = true;
+        const prato = {"nome":nome,"lactose":lactose, "vegano":vegano, "gluten":gluten,"categoria_id":categoria_id, "status":status}
+        
+        try{
+            const novoPrato = await prisma.pratos.create({ data: prato });
+            return novoPrato;
+          }
+        catch (error) {
+            console.error(error);
+            throw new Error('Erro na criação do prato.');
+        }
 
-    //     await pratoRepositorio.save(prato);
-    //     return prato; 
-    // }  
-    
+    }
     
     // Trazer todos os pratos caso não venha parametro na URL, caso venha, pegar os pratos da categoria.
     // async listaTodosOsPratos({categoria_id}){
