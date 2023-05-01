@@ -16,19 +16,18 @@ interface TypesPrato{
 }
 
 class HandleDbPratos{
-    async listaPrato({nome}){
-        console.log(nome);
+    async listaPrato({nome}){        
         const prato = await prisma.pratos.findMany({
             where:{
                 nome:{
                     contains:nome
                 }
-            }
+            },
+            include: {
+                categorias: true
+              }
         });        
-        // const prato = await pratoRepositorio.find();
-        // const prato = 'null';
-        // const prato = await prisma.pratos.findMany();
-        
+
         if(!prato || typeof(prato) == "undefined"){
             throw new Error("Prato Inexistente");
         }
