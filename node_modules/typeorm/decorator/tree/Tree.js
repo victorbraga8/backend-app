@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Tree = void 0;
-var globals_1 = require("../../globals");
+const globals_1 = require("../../globals");
 /**
  * Marks entity to work like a tree.
  * Tree pattern that will be used for the tree entity should be specified.
@@ -10,10 +10,10 @@ var globals_1 = require("../../globals");
  */
 function Tree(type, options) {
     return function (target) {
-        globals_1.getMetadataArgsStorage().trees.push({
+        (0, globals_1.getMetadataArgsStorage)().trees.push({
             target: target,
             type: type,
-            options: type === "closure-table" ? options : undefined
+            options: type === "closure-table" ? options : undefined,
         });
     };
 }

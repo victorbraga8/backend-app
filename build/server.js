@@ -8,7 +8,7 @@ var express_1 = __importDefault(require("express"));
 require("express-async-errors");
 var routes_1 = require("./routes");
 require("./database");
-var app = express_1.default();
+var app = (0, express_1.default)();
 var cors = require('cors');
 app.use(cors('*'));
 app.use(express_1.default.json());
@@ -24,5 +24,5 @@ app.use(function (err, request, response, next) {
         message: "Internal Server Error"
     });
 });
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 8080);
 //# sourceMappingURL=server.js.map

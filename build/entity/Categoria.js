@@ -16,19 +16,19 @@ var Categoria = /** @class */ (function () {
     function Categoria() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn('increment'),
+        (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
         __metadata("design:type", Number)
     ], Categoria.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column('text'),
+        (0, typeorm_1.Column)('text'),
         __metadata("design:type", String)
     ], Categoria.prototype, "nome", void 0);
     __decorate([
-        typeorm_1.OneToMany(function () { return Prato_1.Prato; }, function (prato) { return prato.categoria; }),
+        (0, typeorm_1.OneToMany)(function () { return Prato_1.Prato; }, function (prato) { return prato.categoria; }),
         __metadata("design:type", Prato_1.Prato)
     ], Categoria.prototype, "prato", void 0);
     Categoria = __decorate([
-        typeorm_1.Entity("categorias")
+        (0, typeorm_1.Entity)("categorias")
     ], Categoria);
     return Categoria;
 }());

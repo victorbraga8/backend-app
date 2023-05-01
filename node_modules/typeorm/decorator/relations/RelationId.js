@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RelationId = void 0;
-var globals_1 = require("../../globals");
+const globals_1 = require("../../globals");
 /**
  * Special decorator used to extract relation id into separate entity property.
  *
@@ -9,12 +9,12 @@ var globals_1 = require("../../globals");
  */
 function RelationId(relation, alias, queryBuilderFactory) {
     return function (object, propertyName) {
-        globals_1.getMetadataArgsStorage().relationIds.push({
+        (0, globals_1.getMetadataArgsStorage)().relationIds.push({
             target: object.constructor,
             propertyName: propertyName,
             relation: relation,
             alias: alias,
-            queryBuilderFactory: queryBuilderFactory
+            queryBuilderFactory: queryBuilderFactory,
         });
     };
 }

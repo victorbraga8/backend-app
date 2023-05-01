@@ -16,31 +16,31 @@ var Usuario = /** @class */ (function () {
     function Usuario() {
     }
     __decorate([
-        typeorm_1.PrimaryColumn('int'),
+        (0, typeorm_1.PrimaryColumn)('int'),
         __metadata("design:type", String)
     ], Usuario.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column('text'),
+        (0, typeorm_1.Column)('text'),
         __metadata("design:type", String)
     ], Usuario.prototype, "name", void 0);
     __decorate([
-        typeorm_1.Column('text'),
+        (0, typeorm_1.Column)('text'),
         __metadata("design:type", String)
     ], Usuario.prototype, "email", void 0);
     __decorate([
-        typeorm_1.Column('boolean'),
+        (0, typeorm_1.Column)('boolean'),
         __metadata("design:type", Boolean)
     ], Usuario.prototype, "admin", void 0);
     __decorate([
-        typeorm_1.CreateDateColumn(),
+        (0, typeorm_1.CreateDateColumn)(),
         __metadata("design:type", Date)
     ], Usuario.prototype, "created_at", void 0);
     __decorate([
-        typeorm_1.UpdateDateColumn(),
+        (0, typeorm_1.UpdateDateColumn)(),
         __metadata("design:type", Date)
     ], Usuario.prototype, "updated_at", void 0);
     Usuario = __decorate([
-        typeorm_1.Entity("usuarios")
+        (0, typeorm_1.Entity)("usuarios")
     ], Usuario);
     return Usuario;
 }());

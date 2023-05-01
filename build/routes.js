@@ -6,7 +6,7 @@ var PratosController_1 = require("./controllers/PratosController");
 var CategoriasController_1 = require("./controllers/CategoriasController");
 var CardapiosController_1 = require("./controllers/CardapiosController");
 var CardapioPratoController_1 = require("./controllers/CardapioPratoController");
-var router = express_1.Router();
+var router = (0, express_1.Router)();
 exports.router = router;
 // const createUserController = new CreateUserController();
 var HandlePratosController = new PratosController_1.HandlePratos();
@@ -14,7 +14,7 @@ var HandleCategoriasController = new CategoriasController_1.HandleCategorias();
 var HandleCardapiosController = new CardapiosController_1.HandleCardapios();
 var HandleCardapioPratoController = new CardapioPratoController_1.HandleCardapioPrato();
 // router.post("/users", createUserController.handle)
-router.get("/", function (req, res) { res.json({ "mensagem": "Rota Base Atualizada - Inclusão de NPX TSC" }); });
+router.get("/", function (req, res) { res.json({ "mensagem": "Inclusão de Cache" }); });
 router.post("/prato", HandlePratosController.inserePrato);
 router.get("/listaprato/:nome?", HandlePratosController.listaPrato);
 router.get("/listatodosospratos/:nome?/:categoria_id?/:status?", HandlePratosController.listaTodosOsPratos);

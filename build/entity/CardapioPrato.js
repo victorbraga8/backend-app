@@ -15,19 +15,19 @@ var CardapioPrato = /** @class */ (function () {
     function CardapioPrato() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn('increment'),
+        (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
         __metadata("design:type", Number)
     ], CardapioPrato.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column('int'),
+        (0, typeorm_1.Column)('int'),
         __metadata("design:type", Number)
     ], CardapioPrato.prototype, "prato_id", void 0);
     __decorate([
-        typeorm_1.Column('int'),
+        (0, typeorm_1.Column)('int'),
         __metadata("design:type", Number)
     ], CardapioPrato.prototype, "cardapio_id", void 0);
     CardapioPrato = __decorate([
-        typeorm_1.Entity("cardapioPrato")
+        (0, typeorm_1.Entity)("cardapioPrato")
     ], CardapioPrato);
     return CardapioPrato;
 }());

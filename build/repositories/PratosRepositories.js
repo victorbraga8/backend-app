@@ -30,7 +30,7 @@ var PratoRepositories = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     PratoRepositories = __decorate([
-        typeorm_1.EntityRepository(Prato_1.Prato)
+        (0, typeorm_1.EntityRepository)(Prato_1.Prato)
     ], PratoRepositories);
     return PratoRepositories;
 }(typeorm_1.Repository));

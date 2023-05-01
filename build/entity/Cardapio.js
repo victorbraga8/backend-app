@@ -16,20 +16,20 @@ var Cardapio = /** @class */ (function () {
     function Cardapio() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn('increment'),
+        (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
         __metadata("design:type", Number)
     ], Cardapio.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column('date'),
+        (0, typeorm_1.Column)('date'),
         __metadata("design:type", Date)
     ], Cardapio.prototype, "data", void 0);
     __decorate([
-        typeorm_1.Column('date'),
+        (0, typeorm_1.Column)('date'),
         __metadata("design:type", Date)
     ], Cardapio.prototype, "updated_at", void 0);
     __decorate([
-        typeorm_1.ManyToMany(function () { return Prato_1.Prato; }, function (prato) { return prato.cardapios; }),
-        typeorm_1.JoinTable({
+        (0, typeorm_1.ManyToMany)(function () { return Prato_1.Prato; }, function (prato) { return prato.cardapios; }),
+        (0, typeorm_1.JoinTable)({
             name: "cardapioPrato",
             joinColumn: {
                 name: "cardapio_id",
@@ -43,7 +43,7 @@ var Cardapio = /** @class */ (function () {
         __metadata("design:type", Prato_1.Prato)
     ], Cardapio.prototype, "pratos", void 0);
     Cardapio = __decorate([
-        typeorm_1.Entity("cardapio")
+        (0, typeorm_1.Entity)("cardapio")
     ], Cardapio);
     return Cardapio;
 }());

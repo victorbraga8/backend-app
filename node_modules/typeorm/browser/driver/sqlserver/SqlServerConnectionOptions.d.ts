@@ -1,9 +1,9 @@
-import { BaseConnectionOptions } from "../../connection/BaseConnectionOptions";
+import { BaseDataSourceOptions } from "../../data-source/BaseDataSourceOptions";
 import { SqlServerConnectionCredentialsOptions } from "./SqlServerConnectionCredentialsOptions";
 /**
  * Microsoft Sql Server specific connection options.
  */
-export interface SqlServerConnectionOptions extends BaseConnectionOptions, SqlServerConnectionCredentialsOptions {
+export interface SqlServerConnectionOptions extends BaseDataSourceOptions, SqlServerConnectionCredentialsOptions {
     /**
      * Database type.
      */
@@ -26,6 +26,11 @@ export interface SqlServerConnectionOptions extends BaseConnectionOptions, SqlSe
      * Database schema.
      */
     readonly schema?: string;
+    /**
+     * The driver object
+     * This defaults to `require("mssql")`
+     */
+    readonly driver?: any;
     /**
      * An optional object/dictionary with the any of the properties
      */
@@ -113,7 +118,7 @@ export interface SqlServerConnectionOptions extends BaseConnectionOptions, SqlSe
          */
         readonly packetSize?: number;
         /**
-         * A boolean determining whether to pass time values in UTC or local time. (default: true).
+         * A boolean determining whether to pass time values in UTC or local time. (default: false).
          */
         readonly useUTC?: boolean;
         /**
@@ -181,7 +186,7 @@ export interface SqlServerConnectionOptions extends BaseConnectionOptions, SqlSe
         readonly readOnlyIntent?: boolean;
         /**
          * A boolean determining whether or not the connection will be encrypted. Set to true if you're on
-         * Windows Azure. (default: false).
+         * Windows Azure. (default: true).
          */
         readonly encrypt?: boolean;
         /**
@@ -209,6 +214,11 @@ export interface SqlServerConnectionOptions extends BaseConnectionOptions, SqlSe
          * A boolean, that when true will abort a query when an overflow or divide-by-zero error occurs during query execution.
          */
         readonly enableArithAbort?: boolean;
+        /**
+         * Application name used for identifying a specific application in profiling, logging or tracing tools of SQL Server.
+         * (default: node-mssql)
+         */
+        readonly appName?: string;
     };
     /**
      * Replication setup.
@@ -223,4 +233,5 @@ export interface SqlServerConnectionOptions extends BaseConnectionOptions, SqlSe
          */
         readonly slaves: SqlServerConnectionCredentialsOptions[];
     };
+    readonly poolSize?: never;
 }

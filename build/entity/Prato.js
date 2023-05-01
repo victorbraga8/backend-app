@@ -17,44 +17,44 @@ var Prato = /** @class */ (function () {
     function Prato() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn('increment'),
+        (0, typeorm_1.PrimaryGeneratedColumn)('increment'),
         __metadata("design:type", Number)
     ], Prato.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column('text'),
+        (0, typeorm_1.Column)('text'),
         __metadata("design:type", String)
     ], Prato.prototype, "nome", void 0);
     __decorate([
-        typeorm_1.Column('int'),
+        (0, typeorm_1.Column)('int'),
         __metadata("design:type", Number)
     ], Prato.prototype, "lactose", void 0);
     __decorate([
-        typeorm_1.Column('int'),
+        (0, typeorm_1.Column)('int'),
         __metadata("design:type", Number)
     ], Prato.prototype, "vegano", void 0);
     __decorate([
-        typeorm_1.Column('int'),
+        (0, typeorm_1.Column)('int'),
         __metadata("design:type", Number)
     ], Prato.prototype, "gluten", void 0);
     __decorate([
-        typeorm_1.Column('int'),
+        (0, typeorm_1.Column)('int'),
         __metadata("design:type", Number)
     ], Prato.prototype, "categoria_id", void 0);
     __decorate([
-        typeorm_1.Column('boolean'),
+        (0, typeorm_1.Column)('boolean'),
         __metadata("design:type", Boolean)
     ], Prato.prototype, "status", void 0);
     __decorate([
-        typeorm_1.ManyToMany(function () { return Cardapio_1.Cardapio; }, function (cardapio) { return cardapio.pratos; }),
+        (0, typeorm_1.ManyToMany)(function () { return Cardapio_1.Cardapio; }, function (cardapio) { return cardapio.pratos; }),
         __metadata("design:type", Cardapio_1.Cardapio)
     ], Prato.prototype, "cardapios", void 0);
     __decorate([
-        typeorm_1.JoinColumn({ name: 'categoria_id' }),
-        typeorm_1.ManyToOne(function () { return Categoria_1.Categoria; }, function (categoria) { return categoria.prato; }),
+        (0, typeorm_1.JoinColumn)({ name: 'categoria_id' }),
+        (0, typeorm_1.ManyToOne)(function () { return Categoria_1.Categoria; }, function (categoria) { return categoria.prato; }),
         __metadata("design:type", Array)
     ], Prato.prototype, "categoria", void 0);
     Prato = __decorate([
-        typeorm_1.Entity("pratos")
+        (0, typeorm_1.Entity)("pratos")
     ], Prato);
     return Prato;
 }());

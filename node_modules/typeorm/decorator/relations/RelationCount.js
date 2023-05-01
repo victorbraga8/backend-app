@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RelationCount = void 0;
-var globals_1 = require("../../globals");
+const globals_1 = require("../../globals");
 /**
  * Holds a number of children in the closure table of the column.
  *
@@ -9,12 +9,12 @@ var globals_1 = require("../../globals");
  */
 function RelationCount(relation, alias, queryBuilderFactory) {
     return function (object, propertyName) {
-        globals_1.getMetadataArgsStorage().relationCounts.push({
+        (0, globals_1.getMetadataArgsStorage)().relationCounts.push({
             target: object.constructor,
             propertyName: propertyName,
             relation: relation,
             alias: alias,
-            queryBuilderFactory: queryBuilderFactory
+            queryBuilderFactory: queryBuilderFactory,
         });
     };
 }

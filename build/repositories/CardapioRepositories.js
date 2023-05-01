@@ -30,7 +30,7 @@ var CardapioRepositories = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     CardapioRepositories = __decorate([
-        typeorm_1.EntityRepository(Cardapio_1.Cardapio)
+        (0, typeorm_1.EntityRepository)(Cardapio_1.Cardapio)
     ], CardapioRepositories);
     return CardapioRepositories;
 }(typeorm_1.Repository));

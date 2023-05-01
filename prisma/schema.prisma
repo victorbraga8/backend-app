@@ -1,0 +1,134 @@
+generator client {
+  provider = "prisma-client-js"
+  reviewFeatures = ["query-logging"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model pratos {
+  id           Int     @id @default(autoincrement())
+  nome         String  @db.VarChar(255)
+  categoria_id Int
+  status       Boolean
+}
+
+model cardapio {
+  id         Int      @id @default(autoincrement())
+  data       DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @default(now()) @db.Timestamp(0)
+}
+
+model cardapioPrato {
+  id          Int @id @default(autoincrement())
+  prato_id    Int
+  cardapio_id Int
+}
+
+model categorias {
+  id   Int    @id @default(autoincrement())
+  nome String @db.VarChar(255)
+}
+
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Ad {
+  id              String   @db.VarChar(255)
+  gameId          String   @db.VarChar(255)
+  name            String   @db.VarChar(50)
+  yearsPlaying    Int
+  discord         String   @db.VarChar(50)
+  weekDays        String   @db.VarChar(25)
+  hourStart       String   @db.VarChar(10)
+  hourEnd         String   @db.VarChar(10)
+  useVoiceChannel Boolean
+  createdAt       DateTime @default(now()) @db.DateTime(0)
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by the Prisma Client.
+model Game {
+  id        String @db.VarChar(255)
+  title     String @db.VarChar(50)
+  bannerUrl String @db.VarChar(255)
+  ads       Int
+
+  @@ignore
+}
+
+model SequelizeMeta {
+  name String @id @unique(map: "name") @db.VarChar(255)
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  firstName String?  @db.VarChar(255)
+  lastName  String?  @db.VarChar(255)
+  email     String?  @db.VarChar(255)
+  createdAt DateTime @db.DateTime(0)
+  updatedAt DateTime @db.DateTime(0)
+}
+
+model abmcj {
+  id           Int      @id @default(autoincrement())
+  nome         String   @db.VarChar(40)
+  email        String   @db.VarChar(40)
+  dataAdmissao DateTime @db.Date
+  cargo        String   @db.VarChar(250)
+  carreira     String   @db.VarChar(50)
+  comissao     String   @db.VarChar(50)
+  regional     String   @db.VarChar(2)
+  inscricao    String   @db.VarChar(10)
+  comprovante  String   @db.VarChar(150)
+  conclusao    String?  @db.VarChar(150)
+}
+
+model abmcj_espelho {
+  id           Int      @id @default(autoincrement())
+  nome         String   @db.VarChar(40)
+  email        String   @db.VarChar(40)
+  dataAdmissao DateTime @db.Date
+  cargo        String   @db.VarChar(20)
+  carreira     String   @db.VarChar(50)
+  comissao     String   @db.VarChar(5)
+  regional     String   @db.VarChar(2)
+  inscricao    String   @db.VarChar(10)
+  comprovante  String   @db.VarChar(50)
+  conclusao    String?  @db.VarChar(150)
+}
+
+
+
+model hospedagemClientes {
+  id                   Int       @id @default(autoincrement())
+  nome                 String    @db.VarChar(50)
+  custoTecnico         Int?
+  valorCobrado         Int?
+  valorLiquidoRecebido Int?
+  telefone             String?   @db.VarChar(30)
+  local                String?   @db.VarChar(50)
+  login                String?   @db.VarChar(50)
+  senha                String?   @db.VarChar(50)
+  expiracao            DateTime? @db.Date
+  inicioContrato       DateTime  @db.Date
+  ultimaAtualizacao    DateTime? @db.Date
+}
+
+model migrations {
+  id        Int    @id @default(autoincrement())
+  timestamp BigInt
+  name      String @db.VarChar(255)
+}
+
+model usuarios {
+  id         Int      @id
+  name       String   @db.VarChar(255)
+  email      String   @db.VarChar(255)
+  admin      Boolean  @default(false)
+  created_at DateTime @default(now()) @db.Timestamp(0)
+  updated_at DateTime @default(now()) @db.Timestamp(0)
+}

@@ -14,7 +14,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -40,9 +40,30 @@ exports.HandleDbPratos = void 0;
 var typeorm_1 = require("typeorm");
 var Prato_1 = require("../entity/Prato");
 var PratosRepositories_1 = require("../repositories/PratosRepositories");
+var client_1 = require("@prisma/client");
+var prisma = new client_1.PrismaClient();
 var HandleDbPratos = /** @class */ (function () {
     function HandleDbPratos() {
     }
+    HandleDbPratos.prototype.listaPrato = function (_a) {
+        var nome = _a.nome;
+        return __awaiter(this, void 0, void 0, function () {
+            var pratoRepositorio, prato;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        pratoRepositorio = (0, typeorm_1.getCustomRepository)(PratosRepositories_1.PratoRepositories);
+                        return [4 /*yield*/, prisma.pratos.findMany()];
+                    case 1:
+                        prato = _b.sent();
+                        if (!prato || typeof (prato) == "undefined") {
+                            throw new Error("Prato Inexistente");
+                        }
+                        return [2 /*return*/, prato];
+                }
+            });
+        });
+    };
     HandleDbPratos.prototype.inserePrato = function (_a, status) {
         var nome = _a.nome, lactose = _a.lactose, vegano = _a.vegano, gluten = _a.gluten, categoria_id = _a.categoria_id;
         return __awaiter(this, void 0, void 0, function () {
@@ -50,7 +71,7 @@ var HandleDbPratos = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        pratoRepositorio = typeorm_1.getCustomRepository(PratosRepositories_1.PratoRepositories);
+                        pratoRepositorio = (0, typeorm_1.getCustomRepository)(PratosRepositories_1.PratoRepositories);
                         return [4 /*yield*/, pratoRepositorio.findOne({ nome: nome })];
                     case 1:
                         pratoExistente = _b.sent();
@@ -80,28 +101,6 @@ var HandleDbPratos = /** @class */ (function () {
             });
         });
     };
-    HandleDbPratos.prototype.listaPrato = function (_a) {
-        var nome = _a.nome;
-        return __awaiter(this, void 0, void 0, function () {
-            var pratoRepositorio, prato;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        if (!nome) {
-                            throw new Error("Informe o Prato");
-                        }
-                        pratoRepositorio = typeorm_1.getCustomRepository(PratosRepositories_1.PratoRepositories);
-                        return [4 /*yield*/, pratoRepositorio.findOne({ nome: nome })];
-                    case 1:
-                        prato = _b.sent();
-                        if (!prato || typeof (prato) == "undefined") {
-                            throw new Error("Prato Inexistente");
-                        }
-                        return [2 /*return*/, prato];
-                }
-            });
-        });
-    };
     // Trazer todos os pratos caso não venha parametro na URL, caso venha, pegar os pratos da categoria.
     HandleDbPratos.prototype.listaTodosOsPratos = function (_a) {
         var categoria_id = _a.categoria_id;
@@ -110,7 +109,7 @@ var HandleDbPratos = /** @class */ (function () {
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        pratoRepositorio = typeorm_1.getCustomRepository(PratosRepositories_1.PratoRepositories);
+                        pratoRepositorio = (0, typeorm_1.getCustomRepository)(PratosRepositories_1.PratoRepositories);
                         if (!!categoria_id) return [3 /*break*/, 2];
                         return [4 /*yield*/, pratoRepositorio.createQueryBuilder('pratos')
                                 .orderBy("pratos.nome", "ASC")
@@ -143,7 +142,7 @@ var HandleDbPratos = /** @class */ (function () {
                         if (!id && !categoria_id && !status) {
                             throw new Error("Informe o Prato, Categoria ou Status");
                         }
-                        pratoRepositorio = typeorm_1.getCustomRepository(PratosRepositories_1.PratoRepositories);
+                        pratoRepositorio = (0, typeorm_1.getCustomRepository)(PratosRepositories_1.PratoRepositories);
                         return [4 /*yield*/, pratoRepositorio.findOne({ id: id })];
                     case 1:
                         prato = _b.sent();
@@ -192,7 +191,7 @@ var HandleDbPratos = /** @class */ (function () {
                         if (!id) {
                             throw new Error("Informe o Prato para exclusão");
                         }
-                        pratoRepositorio = typeorm_1.getCustomRepository(PratosRepositories_1.PratoRepositories);
+                        pratoRepositorio = (0, typeorm_1.getCustomRepository)(PratosRepositories_1.PratoRepositories);
                         if (!id) return [3 /*break*/, 2];
                         return [4 /*yield*/, pratoRepositorio.createQueryBuilder("Prato").delete().from(Prato_1.Prato)
                                 .where("id = :id", { id: id }).execute()];

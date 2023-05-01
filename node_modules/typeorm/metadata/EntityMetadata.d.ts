@@ -1,6 +1,6 @@
 import { QueryRunner, SelectQueryBuilder } from "..";
 import { ObjectLiteral } from "../common/ObjectLiteral";
-import { Connection } from "../connection/Connection";
+import { DataSource } from "../data-source/DataSource";
 import { OrderByCondition } from "../find-options/OrderByCondition";
 import { TableMetadataArgs } from "../metadata-args/TableMetadataArgs";
 import { TreeMetadataArgs } from "../metadata-args/TreeMetadataArgs";
@@ -22,10 +22,11 @@ import { ClosureTreeOptions } from "./types/ClosureTreeOptions";
  * Contains all entity metadata.
  */
 export declare class EntityMetadata {
+    readonly "@instanceof": symbol;
     /**
      * Connection where this entity metadata is created.
      */
-    connection: Connection;
+    connection: DataSource;
     /**
      * Metadata arguments used to build this entity metadata.
      */
@@ -76,7 +77,12 @@ export declare class EntityMetadata {
      * View's expression.
      * Used in views
      */
-    expression?: string | ((connection: Connection) => SelectQueryBuilder<any>);
+    expression?: string | ((connection: DataSource) => SelectQueryBuilder<any>);
+    /**
+     * View's dependencies.
+     * Used in views
+     */
+    dependsOn?: Set<Function | string>;
     /**
      * Enables Sqlite "WITHOUT ROWID" modifier for the "CREATE TABLE" statement
      */
@@ -382,9 +388,25 @@ export declare class EntityMetadata {
      */
     beforeRemoveListeners: EntityListenerMetadata[];
     /**
+     * Listener metadatas with "BEFORE SOFT REMOVE" type.
+     */
+    beforeSoftRemoveListeners: EntityListenerMetadata[];
+    /**
+     * Listener metadatas with "BEFORE RECOVER" type.
+     */
+    beforeRecoverListeners: EntityListenerMetadata[];
+    /**
      * Listener metadatas with "AFTER REMOVE" type.
      */
     afterRemoveListeners: EntityListenerMetadata[];
+    /**
+     * Listener metadatas with "AFTER SOFT REMOVE" type.
+     */
+    afterSoftRemoveListeners: EntityListenerMetadata[];
+    /**
+     * Listener metadatas with "AFTER RECOVER" type.
+     */
+    afterRecoverListeners: EntityListenerMetadata[];
     /**
      * Map of columns and relations of the entity.
      *
@@ -394,7 +416,7 @@ export declare class EntityMetadata {
      */
     propertiesMap: ObjectLiteral;
     constructor(options: {
-        connection: Connection;
+        connection: DataSource;
         inheritanceTree?: Function[];
         inheritancePattern?: "STI";
         tableTree?: TreeMetadataArgs;
@@ -406,6 +428,7 @@ export declare class EntityMetadata {
      */
     create(queryRunner?: QueryRunner, options?: {
         fromDeserializer?: boolean;
+        pojo?: boolean;
     }): any;
     /**
      * Checks if given entity has an id.
@@ -459,6 +482,11 @@ export declare class EntityMetadata {
      */
     findColumnWithPropertyPath(propertyPath: string): ColumnMetadata | undefined;
     /**
+     * Finds column with a given property path.
+     * Does not search in relation unlike findColumnWithPropertyPath.
+     */
+    findColumnWithPropertyPathStrict(propertyPath: string): ColumnMetadata | undefined;
+    /**
      * Finds columns with a given property path.
      * Property path can match a relation, and relations can contain multiple columns.
      */
@@ -479,6 +507,10 @@ export declare class EntityMetadata {
      * Finds embedded with a given property path.
      */
     findEmbeddedWithPropertyPath(propertyPath: string): EmbeddedMetadata | undefined;
+    /**
+     * Returns an array of databaseNames mapped from provided propertyPaths
+     */
+    mapPropertyPathsToColumns(propertyPaths: string[]): ColumnMetadata[];
     /**
      * Iterates through entity and finds and extracts all values from relations in the entity.
      * If relation value is an array its being flattened.
@@ -519,4 +551,11 @@ export declare class EntityMetadata {
     createPropertiesMap(): {
         [name: string]: string | any;
     };
+    /**
+     * Checks if entity has any column which rely on returning data,
+     * e.g. columns with auto generated value, DEFAULT values considered as dependant of returning data.
+     * For example, if we need to have RETURNING after INSERT (or we need returned id for DBs not supporting RETURNING),
+     * it means we cannot execute bulk inserts in some cases.
+     */
+    getInsertionReturningColumns(): ColumnMetadata[];
 }

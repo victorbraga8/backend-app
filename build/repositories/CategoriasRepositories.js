@@ -30,7 +30,7 @@ var CategoriaRepositories = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     CategoriaRepositories = __decorate([
-        typeorm_1.EntityRepository(Categoria_1.Categoria)
+        (0, typeorm_1.EntityRepository)(Categoria_1.Categoria)
     ], CategoriaRepositories);
     return CategoriaRepositories;
 }(typeorm_1.Repository));
